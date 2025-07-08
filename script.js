@@ -7,3 +7,14 @@ dousCards.forEach(duo => {
     
 });
 console.log(allCards);
+
+
+function shuffle(allCards) {
+  for (let i = allCards.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [allCards[i], allCards[j]] = [allCards[j], allCards[i]]; 
+  }
+}
+
+shuffle(allCards); 
+console.log(allCards);
