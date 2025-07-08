@@ -17,4 +17,10 @@ function shuffle(allCards) {
 }
 
 shuffle(allCards); 
-console.log(allCards);
+console.log(allCards); 
+
+
+function renderCards(allCards) {
+
+  const gameBoard = document.getElementById("game-board")
+};
