@@ -37,4 +37,9 @@ gameBoard.appendChild(card);
 
 }); 
 }
+
+
+let flippedCards = [];
+let matchCards = 0;
+
 renderCards(allCards);
