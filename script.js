@@ -20,6 +20,19 @@ shuffle(allCards);
 console.log(allCards); 
 
 
+function isMatching(icon1, icon2) {
+  return dousCards.some(pair =>{
+    return(
+      (pair.match === icon1 && pair.made === icon2) || 
+      (pair.match === icon2 && pair.made === icon1)
+
+    );
+  });
+
+};
+
+
+
 function renderCards(allCards) {
 
   const gameBoard = document.getElementById("game-board");
@@ -42,4 +55,6 @@ gameBoard.appendChild(card);
 let flippedCards = [];
 let matchCards = 0;
 
-renderCards(allCards);
+renderCards(allCards); 
+
+
