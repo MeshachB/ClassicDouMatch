@@ -28,8 +28,12 @@ allCards.forEach((cardText)=> {
   const card = document.createElement("div")
   card.textContent = "?";
   card.setAttribute("data-value",cardText);
-  card.classList.add("card");
+  card.classList.add("card"); 
 
+  card.addEventListener("click",() =>{
+    card.textContent = card.getAttribute("data-value");
+  });
+gameBoard.appendChild(card);
 
 }); 
 }
