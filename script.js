@@ -22,5 +22,12 @@ console.log(allCards);
 
 function renderCards(allCards) {
 
-  const gameBoard = document.getElementById("game-board")
-};
+  const gameBoard = document.getElementById("game-board");
+
+allCards.forEach((cardText)=> {
+  const card = document.createElement("div")
+  card.textContent = "?";
+  card.setAttribute("data-value",cardText);
+}); 
+}
+renderCards(allCards);
