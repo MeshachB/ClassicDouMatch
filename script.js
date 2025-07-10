@@ -33,12 +33,31 @@ function isMatching(icon1, icon2) {
 
 
 let flippedCards = [];
-let matchCards = 0;
+let matchCards = 0; 
+let timeLeft= 180;
+let timerId;
 
 function updateScoreboard(){
 const scoreboard = document.getElementById("scoreboard");
   scoreboard.textContent = `Score: ${matchCards}`;
 }
+function startTimer() {
+  const timerDisplay = document.getElementById("timer");
+  timerDisplay.textContent = `Time Left: ${timeLeft}s`;
+
+  timerId = setInterval(() => {
+    timeLeft--; 
+    timerDisplay.textContent = `Time Left: ${timeLeft}s`;
+
+    if(timeLeft <= 0) {
+      clearInterval(timerId);
+      alert("Time is up Game Over.");
+      resetGame();
+    }
+  }
+  ,1000);
+}
+
 
 function renderCards(allCards) {
 
@@ -83,7 +102,7 @@ allCards.forEach((cardText)=> {
     },
      1000);
 
-  }
+  } 
 
 }
     
@@ -94,10 +113,8 @@ gameBoard.appendChild(card);
 }
 
 renderCards(allCards); 
-
-
 updateScoreboard();  
-
+startTimer();
 
 
 
