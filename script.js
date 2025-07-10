@@ -29,13 +29,20 @@ function isMatching(icon1, icon2) {
     );
   });
 
-};
+} 
 
 
+let flippedCards = [];
+let matchCards = 0;
+
+function updateScoreboard(){
+const scoreboard = document.getElementById("scoreboard");
+  scoreboard.textContent = `Score: ${matchCards}`;
+}
 
 function renderCards(allCards) {
 
-  const gameBoard = document.getElementById("game-board");
+  
 
 allCards.forEach((cardText)=> {
   const card = document.createElement("div")
@@ -43,21 +50,55 @@ allCards.forEach((cardText)=> {
   card.setAttribute("data-value",cardText);
   card.classList.add("card"); 
 
+
   card.addEventListener("click",() =>{
    if (flippedCards.length === 2 || flippedCards.includes(card)){
     return;
    }
-    card.textContent = card.getAttribute("data-value");
+  
+   card.textContent = card.getAttribute("data-value");
+      flippedCards.push(card);
+
+   
+    if (flippedCards.length === 2){
+  const icon1 =flippedCards[0].getAttribute("data-value");
+  const icon2 =flippedCards[1].getAttribute("data-value");
+
+  if(isMatching(icon1, icon2)){
+   matchCards++;
+   updateScoreboard();
+   if (matchCards === 25) {
+    setTimeout(()=> {
+      alert ("Winner ! You matched all the cards !");
+    });
+   }
+   
+   flippedCards = [];
+
+  } else {
+    setTimeout(() => {
+      flippedCards[0].textContent = "?";
+      flippedCards[1].textContent = "?";
+      flippedCards = [];
+    },
+     1000);
+
+  }
+
+}
+    
   });
 gameBoard.appendChild(card);
 
 }); 
 }
 
-
-let flippedCards = [];
-let matchCards = 0;
-
 renderCards(allCards); 
+
+
+updateScoreboard();  
+
+
+
 
 
