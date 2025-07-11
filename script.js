@@ -90,7 +90,7 @@ allCards.forEach((cardText)=> {
   card.classList.add("card"); 
 
   card.addEventListener("click",() =>{
-   if (flippedCards.length === 2 || flippedCards.includes(card)){
+   if (gameOver || flippedCards.length === 2 || flippedCards.includes(card)){
     return;
    }
   
@@ -134,6 +134,9 @@ gameBoard.appendChild(card);
 }); 
 }
 
+resetGame();
+updateScoreboard();
+startTimer();
 
  
 
