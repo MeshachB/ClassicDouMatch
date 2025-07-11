@@ -60,15 +60,12 @@ function startTimer() {
 
 
 function renderCards(allCards) {
-
-  
-
 allCards.forEach((cardText)=> {
+  const gameBoard = document.getElementById("game-board");
   const card = document.createElement("div")
   card.textContent = "?";
   card.setAttribute("data-value",cardText);
   card.classList.add("card"); 
-
 
   card.addEventListener("click",() =>{
    if (flippedCards.length === 2 || flippedCards.includes(card)){
