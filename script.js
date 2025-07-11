@@ -16,7 +16,7 @@ function shuffle(allCards) {
   }
 }
 
-shuffle(allCards); 
+ 
 console.log(allCards); 
 
 
@@ -35,7 +35,29 @@ function isMatching(icon1, icon2) {
 let flippedCards = [];
 let matchCards = 0; 
 let timeLeft= 180;
-let timerId;
+let timerId; 
+let gameOver = false;
+
+function resetGame(){
+  const gameBoard = document.getElementById("game-board");
+  gameBoard.innerHTML= "";
+
+  flippedCards = [];
+  matchCards = 0;
+  gameOver = false;
+
+  updateScoreboard(); 
+  shuffle(allCards); 
+  renderCards(allCards); 
+ 
+}
+
+document.getElementById("Run-it-back").addEventListener("click", () => {
+  document.getElementById("Run-it-back").style.display = "none";
+  timeLeft = 180;
+  resetGame();
+  startTimer();
+});
 
 function updateScoreboard(){
 const scoreboard = document.getElementById("scoreboard");
@@ -44,20 +66,20 @@ const scoreboard = document.getElementById("scoreboard");
 function startTimer() {
   const timerDisplay = document.getElementById("timer");
   timerDisplay.textContent = `Time Left: ${timeLeft}s`;
-
+ 
   timerId = setInterval(() => {
     timeLeft--; 
     timerDisplay.textContent = `Time Left: ${timeLeft}s`;
 
     if(timeLeft <= 0) {
       clearInterval(timerId);
+      gameOver = true;
       alert("Time is up Game Over.");
-      resetGame();
+      document.getElementById("Run-it-back").style.display = "inline"
     }
   }
   ,1000);
 }
-
 
 function renderCards(allCards) {
 allCards.forEach((cardText)=> {
@@ -84,9 +106,12 @@ allCards.forEach((cardText)=> {
    matchCards++;
    updateScoreboard();
    if (matchCards === 25) {
+    clearInterval(timerId);
+    gameOver = true;
     setTimeout(()=> {
       alert ("Winner ! You matched all the cards !");
-    });
+      document.getElementById("Run-it-back").style.display = "inline"; 
+    },300);
    }
    
    flippedCards = [];
@@ -109,10 +134,7 @@ gameBoard.appendChild(card);
 }); 
 }
 
-renderCards(allCards); 
-updateScoreboard();  
-startTimer();
 
-
+ 
 
 
