@@ -5,3 +5,22 @@
   font-family: Arial, sans-serif;
 } 
 
+body {
+  background-color: #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  align-items: center ; 
+  justify-content: flex-start;
+  min-height:100vh ;
+  padding: 20px;
+}
+ 
+h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+} 
+
+#scoreboard, #timer {
+  font-size: 1.2rem;
+  margin: 5px 0;
+} 
