@@ -58,6 +58,11 @@ h1 {
   position: relative;
   overflow: hidden;
   transition: transform 0.3s;
+  text-align: center;
+  word-wrap: break-word;
+  white-space: normal;
+  padding: 5px;
+  line-height : 1.1;
 } 
 
 .card.face-down {
