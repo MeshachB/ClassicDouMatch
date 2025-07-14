@@ -30,14 +30,15 @@ h1 {
   flex-wrap: wrap;
   justify-content: center;
   gap: 12px;
-  max-width: 600px;
+  max-width: 970px;
+  width: 100%;
   margin-top: 20px;
 } 
 
 .card {
-  width: 100px;
-  height: 140px;
-  margin: 10px;
+  width: 90px;
+  height: 130px;
+  margin: 8px;
   border: 2px solid #444;
   border-radius: 10px;
   display: flex;
@@ -51,12 +52,12 @@ h1 {
   transition: transform 0.3s;
 } 
 
-card.face-down {
+.card.face-down {
 background-image: url();
 background-size: 60%;
 background-repeat: no-repeat;
 background-position: center;
-color: transparent
+color: transparent;
 }
 
 .card.face-up{
