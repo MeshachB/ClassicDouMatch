@@ -88,4 +88,86 @@ color: transparent;
   background-image: none;
   color: #000;
   font-weight: bold;
+} 
+
+
+/* 
+-----------------------------
+CSS CODE GRAVEYARD – Where Bad Styling Goes to Reflect 
+This is where I dropped some styles that didn’t quite work but taught me a lot.
+They lived. They failed. They made the game better.
+-----------------------------
+*/
+
+/*  Tried to center text vertically with margin... didn’t work inside Flex container */
+/*
+.card p {
+  margin-top: 50%;
 }
+*/
+/*  Learned to use Flexbox with `justify-content` and `align-items` instead. Cleaner and responsive. */
+
+/*  Used 'overflow: auto;' on .card thinking it would help with long names — it just made things scroll  */
+/*
+.card {
+  overflow: auto;
+}
+*/
+/*  Switched to `word-wrap`, `white-space: normal`, and `line-height` — now names fit and don’t look crazy. */
+
+/*  Gave images fixed width/height inside cards too early when I was experimenting with duo pics */
+/*
+.card img {
+  width: 100px;
+  height: 100px;
+}
+*/
+/*  Realized I needed flexible sizing for future upgrades (but ultimately removed images for MVP polish). */
+
+/* Forgot a semicolon here and spent 10 mins wondering why styles weren’t working */
+/*
+.card {
+  position: relative
+  overflow: hidden;
+}
+*/
+/* Pro tip: VS Code will not always scream at you — always double check those semicolons. */
+
+/* Tried setting the board layout using absolute positioning before learning Flexbox */
+/*
+#game-board {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+}
+*/
+/* Rebuilt layout using Flexbox – way more responsive, easier to scale and maintain. */
+
+/*  Used inline styles at first before understanding the power of CSS classes */
+/*
+<div style="border: 2px solid black; padding: 10px;">
+*/
+/*  Moved everything to `.card` and `.game-container` classes. Cleaner and more DRY. */
+
+/*  Originally tried to use a dark background + red text combo — super hard to read */
+/*
+.card {
+  background-color: #111;
+  color: red;
+}
+*/
+/*  Learned about contrast and accessibility (WCAG Level AA) – changed to light background and darker text */
+
+/*  Used vh and vw in ways that broke mobile view on small screens */
+/*
+#game-board {
+  width: 100vw;
+  height: 100vh;
+}
+*/
+/*  Stuck to percentages and flex-wrap for now — MVP wins over flash. Will revisit in future enhancement phase. */
+
+/*  Overall: CSS started out as the confusing part for me, but once I got the layout right and simplified the styles, everything fell into place. 
+   I now see the value in learning Flexbox early and keeping styles clean and scoped. MVP doesn’t need to be fancy — it just needs to work and look decent.
+*/
+

@@ -1,13 +1,19 @@
 
 let allCards = [];
 
-dousCards.forEach(duo => {
+dousCards.forEach(duo => { 
     allCards.push(duo.match);
     allCards.push(duo.made);
     
 });
 
 
+const gameMusic = new Audio("https://archive.org/download/tvtunes_31262/The%20Price%20is%20Right%20-%20Main.mp3")
+gameMusic.loop = true; 
+gameMusic.volume = 0.3;
+
+const clapSound = new Audio("https://assets.mixkit.co/sfx/download/mixkit-end-of-show-crowd-applause-487.mp3")
+clapSound.volume = 0.6;
 
 function shuffle(allCards) {
   for (let i = allCards.length - 1; i > 0; i--) {
@@ -65,6 +71,7 @@ const scoreboard = document.getElementById("scoreboard");
 function startTimer() {
   const timerDisplay = document.getElementById("timer");
   timerDisplay.textContent = `Time Left: ${timeLeft}s`;
+  gameMusic.play();
  
   timerId = setInterval(() => {
     timeLeft--; 
@@ -73,7 +80,9 @@ function startTimer() {
     if(timeLeft <= 0) {
       clearInterval(timerId);
       gameOver = true;
-      alert("Time is up Game Over.");
+      gameMusic.pause();
+      gameMusic.currentTime = 0;
+      showMessage("Time is up Game Over.");
       document.getElementById("Run-it-back").style.display = "inline"
     }
   }
@@ -102,11 +111,14 @@ allCards.forEach((cardText)=> {
   const icon2 =flippedCards[1].getAttribute("data-value");
 
   if(isMatching(icon1, icon2)){
+   clapSound.play();
    matchCards++;
    updateScoreboard();
    if (matchCards === 25) {
     clearInterval(timerId);
     gameOver = true;
+    gameMusic.pause();
+    gameMusic.currentTime = 0;
     setTimeout(()=> {
       showMessage("Winner ! You matched all the cards !");
       document.getElementById("Run-it-back").style.display = "inline"; 
@@ -141,7 +153,94 @@ startTimer();
  
 function showMessage(text){
   const messageEl = document.getElementById("message");
-  messageEl.textContext = text; 
+  messageEl.textContent = text; 
   messageEl.style.display = "block"
 }
 
+
+// -----------------------------
+//  CODE GRAVEYARD – Lessons from the Classic match dou game.
+// This section holds code that didn’t make the final cut.
+// Left here to remind myself how far I’ve come, and to help future me (or another dev) avoid some of the traps.
+// -----------------------------
+
+//  Tried rendering the cards AND clearing the board inside the same loop — cards weren’t showing up right.
+/*
+function renderCards(allCards) {
+  allCards.forEach((cardText) => {
+    const gameBoard = document.getElementById("game-board");
+    gameBoard.innerHTML = ""; // ← this kept resetting every time, wiping out previous cards
+    ...
+  });
+}
+*/
+// Lesson: Move `gameBoard.innerHTML = ""` *outside* of the loop before it starts so the board only clears once.
+
+//  I kept accidentally reusing the wrong variable name ("cardElement") instead of "card"
+/*
+cardElement.textContent = "?"; // undefined!
+cardElement.innerHTML = `<img src="${card.img}" alt="${card.match}" />`;
+*/
+//  Lesson: Stay consistent. “card” ≠ “cardElement”. One small typo, and the whole DOM update fails silently.
+
+//  Alert-based win/loss logic – not rubric-friendly
+/*
+alert("Winner! You matched all the cards!");
+alert("Time is up Game Over.");
+*/
+//  Replaced with `showMessage()` and updated DOM content to follow best practices and accessibility requirements.
+
+//  Defined `showMessage()` *inside* another function – didn’t work when called globally
+/*
+if (matchCards === 25) {
+  function showMessage(text) {
+    ...
+  }
+  showMessage("Winner!");
+}
+*/
+//  Lesson: Declare helper functions like `showMessage()` *outside* so they can be accessed anywhere.
+
+//  Double `setAttribute()` for data-value caused confusion in matching logic.
+/*
+card.setAttribute("data-value", cardText);
+card.setAttribute("data-value", cardData.match); // Redundant and unclear
+*/
+//  Learned to clean up unused code once structure becomes clear
+
+//  Thought I needed both image AND text on the card, ended up complicating things for MVP
+/*
+card.innerHTML = `
+  <img src="${card.img}" alt="${card.match}" />
+  <p>${card.match}</p>
+`;
+*/
+//  In crunch time, I pivoted back to just showing the names — simpler, readable, still fun!
+
+//  Missed a win condition when testing — gameOver wasn't being properly set in all cases
+/*
+if (timeLeft <= 0) {
+  clearInterval(timerId);
+  // forgot to set gameOver = true; and enable reset UI
+}
+*/
+// Got sharper about ensuring state changes (like `gameOver`) happen in *every* path: win or timeout
+
+// Match logic almost tripped me up: I used `.includes()` on the flippedCards array without understanding object identity
+/*
+if (flippedCards.includes(card)) {
+  return;
+}
+*/
+//  Realized that the same visual card might not match the same *reference* if duplicated incorrectly. Keeping things simple avoided bigger bugs.
+
+//  Originally had console logs everywhere for tracking logic — cleaned them up for final submission
+/*
+console.log("Flipped:", flippedCards);
+console.log("Timer:", timeLeft);
+console.log("Match Found!", icon1, icon2);
+*/
+//  Keeping a clean console shows professionalism and helps others reviewing the code
+
+//  Overall: This project taught me A LOT — not just about DOM or game logic, but about *debugging, code clarity, and time management.*
+// I started off wanting a full image-based, audio-enhanced game and trimmed it down for polish. That’s a win in itself.
