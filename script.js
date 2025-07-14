@@ -10,10 +10,10 @@ dousCards.forEach(duo => {
 
 const gameMusic = new Audio("https://archive.org/download/tvtunes_31262/The%20Price%20is%20Right%20-%20Main.mp3")
 gameMusic.loop = true; 
-gameMusic.volume = 0.3;
+gameMusic.volume = 0.1;
 
 const clapSound = new Audio("https://assets.mixkit.co/sfx/download/mixkit-end-of-show-crowd-applause-487.mp3")
-clapSound.volume = 0.6;
+clapSound.volume = 0.2;
 
 function shuffle(allCards) {
   for (let i = allCards.length - 1; i > 0; i--) {
