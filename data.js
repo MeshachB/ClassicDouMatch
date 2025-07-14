@@ -1,7 +1,7 @@
 const dousCards = [
 { match:"Kobe", made:"Shaq" },
 { match:"Batman", made:"Robin"},
-{ match:"Raekwon",made:"Gostface"},
+{ match:"Raekwon",made:"Ghostface"},
 { match:"Jordan", made:"Pippen"},
 { match:"Will", made:"Carlton"},
 { match:"Mario",made:"Luigi"},
