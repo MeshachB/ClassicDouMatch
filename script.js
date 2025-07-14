@@ -6,7 +6,7 @@ dousCards.forEach(duo => {
     allCards.push(duo.made);
     
 });
-console.log(allCards);
+
 
 
 function shuffle(allCards) {
@@ -17,7 +17,6 @@ function shuffle(allCards) {
 }
 
  
-console.log(allCards); 
 
 
 function isMatching(icon1, icon2) {
@@ -109,10 +108,11 @@ allCards.forEach((cardText)=> {
     clearInterval(timerId);
     gameOver = true;
     setTimeout(()=> {
-      alert ("Winner ! You matched all the cards !");
+      showMessage("Winner ! You matched all the cards !");
       document.getElementById("Run-it-back").style.display = "inline"; 
     },300);
-   }
+   } 
+   
    
    flippedCards = [];
 
@@ -139,5 +139,9 @@ updateScoreboard();
 startTimer();
 
  
-
+function showMessage(text){
+  const messageEl = document.getElementById("message");
+  messageEl.textContext = text; 
+  messageEl.style.display = "block"
+}
 
